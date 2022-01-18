@@ -6,35 +6,47 @@ import FacebookStrategy from "passport-facebook";
 
 import User from './models/User.js';
 
-// Configure Passport authenticated session persistence.
-passport.serializeUser((user, done) => {
+passport.serializeUser(function(user, done) {
     done(null, user);
-  });
-      
-  passport.deserializeUser((obj, done) => {
+});
+  
+passport.deserializeUser(function(obj, done) {
     done(null, obj);
-  });
+});
 
 // Facebook strategy
 passport.use(new FacebookStrategy({
     clientID: process.env['FACEBOOK_APP_ID'],
     clientSecret: process.env['FACEBOOK_APP_SECRET'],
-    callbackURL: 'http://localhost:3000/return'
+    callbackURL: 'http://localhost:5000/auth/return',
+    profileFields: ['id', 'displayName', 'emails']
 },
 async (accessToken, refreshToken, profile, done) => {
     try {
-        console.log(profile);
         // Check if user has logged in before
         const user = await User.findOne({facebook_id: profile.id});
 
-        // If user exists return user
+        // If user exists return user and update accesstoken
         if (user) {
-            done(null, user);
+            const newUser = new User(
+                {
+                    token: accessToken,
+                    _id: user._id
+                }
+            );
+            try {
+                const updateUser = await User.findByIdAndUpdate(user._id, newUser, {new: true});
+                done(null, updateUser);
+            } catch (err) {
+                done(err);
+            }
+
         } else { // Create a new user
             const user = new User({
+                token: accessToken,
                 facebook_id: profile.id,
-                name: profile.name,
-                email: profile.email,
+                name: profile.displayName,
+                email: profile.emails[0].value,
             });
             try {
                 await user.save();

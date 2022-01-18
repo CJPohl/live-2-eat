@@ -2,14 +2,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
-import session from 'express-session';
 import cors from 'cors';
 import passport from 'passport';
 
 const app = express();
 
 // Import routes
-import routes from './routes/routes.js';
+import auth from './routes/auth.js';
+import feed from './routes/feed.js';
+import profile from './routes/profile.js';
 
 // Connect MongoDB
 import mongoose from 'mongoose';
@@ -28,11 +29,11 @@ app.use(cors());
 
 // Init passport and session
 import './passport.js';
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
-app.use(passport.session());
 
 // App use routes
-app.use('/', routes);
+app.use('/auth', auth);
+app.use('/feed', feed);
+app.use('/profile', profile);
 
 app.listen(PORT, () => console.log(`Listening on Port ${PORT}`));
