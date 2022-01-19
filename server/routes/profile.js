@@ -1,49 +1,55 @@
 import express from 'express';
 const router = express.Router();
 
-import {profile_main_get, profile_other_get} from '../controllers/profileController.js';
+import {profile_main_get, profile_search, profile_other_get, follow_profile, unfollow_profile, update_age, update_about, update_height, update_weight, update_weight_change, update_calorie_max, update_calorie_current, reset_calorie_current, update_bmi, add_favorite_food} from '../controllers/profileController.js';
 
 /// Profile Interactions ///
 
 // Show main user profile GET
 router.get('/main', profile_main_get);
 
+// User search GET
+router.get('/search', profile_search);
+
 // Show other user profile GET
 router.get('/:id', profile_other_get);
 
 // Follow profile PUT
-// TODO
+router.put('/follow', follow_profile);
 
 // Unfollow profile PUT
-// TODO
+router.put('/unfollow', unfollow_profile);
 
 /// Profile Updates ///
 
 // Update age PUT
-// TODO
+router.put('/age/update', update_age);
 
 // Update about PUT
-// TODO
+router.put('/about/update', update_about);
 
 // Update height PUT
-// TODO
+router.put('/height/update', update_height);
 
 // Update weight PUT
-// TODO
+router.put('/weight/update', update_weight);
 
 // Update weight change PUT
-// TODO
+router.put('/weight-changed/update', update_weight_change);
 
 // Update calorie max PUT
-// TODO
+router.put('/calorie-max/update', update_calorie_max);
 
 // Update current calories PUT
-// TODO
+router.put('/calorie-current/update', update_calorie_current);
+
+// Reset daily current calories PUT
+router.put('/calorie-current/reset', reset_calorie_current);
 
 // Update BMI PUT
-// TODO
+router.put('/bmi/update', update_bmi);
 
 // Add favorite food PUT
-// TODO
+router.put('/favorite-foods/update', add_favorite_food);
 
 export default router;

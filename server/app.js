@@ -11,6 +11,7 @@ const app = express();
 import auth from './routes/auth.js';
 import feed from './routes/feed.js';
 import profile from './routes/profile.js';
+import food from './routes/food.js';
 
 // Connect MongoDB
 import mongoose from 'mongoose';
@@ -35,5 +36,6 @@ app.use(passport.initialize());
 app.use('/auth', auth);
 app.use('/feed', feed);
 app.use('/profile', profile);
+app.use('/food', food);
 
 app.listen(PORT, () => console.log(`Listening on Port ${PORT}`));

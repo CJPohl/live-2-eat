@@ -11,4 +11,12 @@ const FoodSchema = new Schema(
     }
 );
 
+// Create indexes for user search
+FoodSchema.index(
+    {
+        name: 'text',
+        sub_name: 'text'
+    }
+);
+
 export default mongoose.model('Food', FoodSchema);
