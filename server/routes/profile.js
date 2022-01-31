@@ -6,7 +6,7 @@ import {profile_main_get, profile_search, profile_other_get, follow_profile, unf
 /// Profile Interactions ///
 
 // Show main user profile GET
-router.get('/main', profile_main_get);
+router.get('/main/:token', profile_main_get);
 
 // User search GET
 router.get('/search', profile_search);

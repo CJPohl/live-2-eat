@@ -4,7 +4,7 @@ import Comment from '../models/Comment.js';
 // Gather posts
 export const get_posts = async (req, res) => {
     try {
-        const posts = await Post.find();
+        const posts = await Post.find().sort({'timestamp': -1}).limit(20);
 
         res.status(200).json(posts);
     } catch (err) {

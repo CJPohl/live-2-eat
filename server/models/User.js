@@ -4,11 +4,13 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema (
     {
-        // token: {type: String, required: true},
-        // facebook_id: {type: String, required: true},
-        // name: {type: String, required: true},
-        // email: {type: String, required: true},
-        age: {type: Number, default: 0, required: true},
+        current_token: {type: String , default: ''},
+        first_name: {type: String, required: true},
+        last_name: {type: String, required: true},
+        email: {type: String, required: true},
+        password: {type: String, required: true},
+        age: {type: Number, required: true},
+        gender: {type: String, required: true},
         about: {type: String, default: 'Write something about yourself!', required: true},
         height: {type: String, default: 'Your Height', required: true},
         weight: {type: Number, default: 0, required: true},
@@ -20,14 +22,17 @@ const UserSchema = new Schema (
         favorite_foods: [{type: Schema.Types.ObjectId, ref: 'Food'}],
         followers: [{type: Schema.Types.ObjectId, ref: 'User'}],
         following: [{type: Schema.Types.ObjectId, ref: 'User'}],
-        posts: [{type: Schema.Types.ObjectId, ref: 'Post'}]
+        posts: [{type: Schema.Types.ObjectId, ref: 'Post'}],
+        new_user: {type: Boolean, default: true}
     }
 );
 
 // Create indexes for user search
 UserSchema.index(
     {
-        name: 'text',
+        first_name: 'text',
+        last_name: 'text',
+        
     }
 );
 

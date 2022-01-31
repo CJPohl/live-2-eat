@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.fade-in {
+    animation: fadein .5s;
+}
+
+.fade-in-slow {
+    animation: fadein 2s;
+}
+
+.fade-in-slower {
+    animation: fadein 5s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

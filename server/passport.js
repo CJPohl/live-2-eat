@@ -2,61 +2,53 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import passport from "passport";
-import FacebookStrategy from "passport-facebook";
+import 'passport-local';
+import passportLocal from 'passport-local';
+import bcrypt from 'bcryptjs';
+
+import passportJwt from 'passport-jwt';
+const JWTstrategy = passportJwt.Strategy;
+const ExtractJWT = passportJwt.ExtractJwt;
+
+const LocalStrategy = passportLocal.Strategy;
 
 import User from './models/User.js';
 
-passport.serializeUser(function(user, done) {
-    done(null, user);
-});
-  
-passport.deserializeUser(function(obj, done) {
-    done(null, obj);
-});
-
-// Facebook strategy
-passport.use(new FacebookStrategy({
-    clientID: process.env['FACEBOOK_APP_ID'],
-    clientSecret: process.env['FACEBOOK_APP_SECRET'],
-    callbackURL: 'http://localhost:5000/auth/return',
-    profileFields: ['id', 'displayName', 'emails']
+// Local login strategy
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
 },
-async (accessToken, refreshToken, profile, done) => {
+async (email, password, done) => {
     try {
-        // Check if user has logged in before
-        const user = await User.findOne({facebook_id: profile.id});
+        // query admin user
+        const user = await User.findOne({email});
+        if (!user) {
+            return done(null, false, {message: 'Incorrect Email'});
+        }
+        if (!bcrypt.compareSync(password, user.password)) {
+            return done(null, false, { message: "Incorrect password" });
+        }
+        return done(null, user, {message: 'Logged In Successfully'});
 
-        // If user exists return user and update accesstoken
-        if (user) {
-            const newUser = new User(
-                {
-                    token: accessToken,
-                    _id: user._id
-                }
-            );
-            try {
-                const updateUser = await User.findByIdAndUpdate(user._id, newUser, {new: true});
-                done(null, updateUser);
-            } catch (err) {
-                done(err);
-            }
+    } catch (err) {
+        return done(err);
+    }
+}));
 
-        } else { // Create a new user
-            const user = new User({
-                token: accessToken,
-                facebook_id: profile.id,
-                name: profile.displayName,
-                email: profile.emails[0].value,
-            });
+// JWT strategy
+passport.use(
+    new JWTstrategy(
+        {
+            secretOrKey: 'food',
+            jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token'),
+        },
+        async (token, done) => {
             try {
-                await user.save();
-                done(null, user);
+                return done(null, token.user);
             } catch (err) {
                 done(err);
             }
         }
-    } catch (err) {
-        return done(err);
-    }
-}
-));
+    )
+);

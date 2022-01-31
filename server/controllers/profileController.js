@@ -3,7 +3,8 @@ import User from '../models/User.js';
 // Send main profile
 export const profile_main_get = async (req, res) => {
     try {
-        const userProfile = await User.findOne({token: req.body.token});
+        const userProfile = await User.findOne({'current_token': req.params.token});
+        console.log('Profile fetched.')
         res.status(200).json(userProfile);
     } catch (err) {
         res.status(404).json({msg: err.message});
