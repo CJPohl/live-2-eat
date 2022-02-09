@@ -6,7 +6,16 @@ import { ProfileSettings } from "./ProfileSettings";
 export const ProfileTabSelector = () => {
     const [currentTab, toggleTab] = useState('food');
 
-    const content = (currentTab==='food') ? <ProfileFood /> : <ProfileSettings />;
+    // Dictate tab content depending on current tab selected
+    let content;
+    if (currentTab==='food') {
+        content= <ProfileFood />
+    }
+    else if (currentTab==='posts') {
+        content='';
+    } else {
+        content= <ProfileSettings />
+    }
 
     const toggleFood = () => {
         if (currentTab==='settings') {
@@ -19,12 +28,19 @@ export const ProfileTabSelector = () => {
             toggleTab('settings');
         }
     }
+    
+    const togglePosts = () => {
+        if (currentTab==='posts') {
+            toggleTab('posts');
+        }
+    }
 
     return (
         <div>
-            <section className="flex flex-col gap-5 py-10 text-2xl ">
-                <div className="flex gap-10">
+            <section className="flex flex-col gap-5 py-10 text-xl lg:text-2xl ">
+                <div className="flex gap-10 justify-evenly lg:justify-start">
                     <button type="button" onClick={toggleFood}>Food</button>
+                    <button type="button" onClick={togglePosts}>Posts</button>
                     <button type="button" onClick={toggleSettings}>Settings</button>
                 </div>
                 <div className="border-t-2 text-slate-400"></div>

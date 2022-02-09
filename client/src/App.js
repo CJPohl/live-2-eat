@@ -18,6 +18,7 @@ import { Signup } from './features/auth/Signup';
 import {MainProfile} from './features/profile/MainProfile';
 import { OtherProfile } from './features/profile/OtherProfile';
 import { MobileMenu } from './components/MobileMenu';
+import { NewUser } from './features/profile/NewUser';
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -38,7 +39,7 @@ export const App = () => {
 
     return (
         <Router>
-            <div className='h-screen flex'>
+            <div className='lg:h-screen flex'>
                 <Sidebar />
                 <div className='w-full flex flex-col bg-gradient-to-r from-slate-50 to-gray-100'>
                     <TopBar />
@@ -50,6 +51,7 @@ export const App = () => {
                         <Route exact path='/mobile-menu' element={<MobileMenu />} />
                         <Route exact path='/user-search' element={<UserList />} />
                         <Route exact path='/profile/:id' element={<OtherProfile />} />
+                        <Route exact path='/new-user' element={<NewUser />} />
                     </Routes>
                 </div>
             </div>

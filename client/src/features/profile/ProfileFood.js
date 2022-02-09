@@ -2,14 +2,18 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectProfile } from "./profileSlice";
 
+import { CalorieTab } from "./CalorieTab";
+import { WeightTab } from "./WeightTab";
+import { FoodTab } from "./FoodTab";
+
 export const ProfileFood = () => {
     const profile = useSelector(selectProfile);
+
     return (
-        <section>
-            <div className="flex flex-col gap-2">
-                {(profile.calorie_current < profile.calorie_max) ? <p className="bg-red-600 w-6 lg:w-14 text-center rounded lg:text-xl text-slate-200">{profile.calorie_current}</p> : <p className="bg-green-600 w-6 lg:w-14 text-center rounded lg:text-xl text-slate-200">{profile.calorie_current}</p>}
-                <p className="bg-indigo-900 w-6 lg:w-14 text-center rounded lg:text-xl text-slate-200">{profile.calorie_max}</p>
-            </div>
-        </section>
-    )
+        <div className="flex flex-col gap-10 lg:gap-20 justify-evenly">
+           <CalorieTab profile={profile} />
+           <WeightTab profile={profile} /> 
+           <FoodTab profile={profile} />
+        </div>  
+    );
 }
