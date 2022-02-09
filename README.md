@@ -12,13 +12,13 @@ Eat 2 Live is a modernized calorie and food tracking application that allows use
 ![alt text](https://github.com/CJPohl/live-2-eat/blob/main/images/v0.1-login.png?raw=true)
 
 ### Profile
--
+![alt text](https://github.com/CJPohl/live-2-eat/blob/main/images/v.02-profile.png?raw=true)
 
 ## Live Deployment
 TBA
 
 ## Changelog
-### 0.2
+### v0.2
 - New Features for new users
 - New Users can input various physical attributes which will be updated by NodeJS to the DB
 - BMI, BMR and other attributes are calculated on the spot to reflect user's attributes
@@ -27,7 +27,7 @@ TBA
 - Food tab contains widgets for calories, weight progress, and food collections (links WIP)
 - Colors and Animations to enhance the UI/UX on main profile
 
-### 0.1
+### v0.1
 - Backend RESTful API
 - Sign up
 - Login
