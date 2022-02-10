@@ -9,9 +9,10 @@ export const OtherProfile = () => {
     const navigate = useNavigate();
     const profile = useSelector(selectProfile);
 
+    // If other profile selected has its params equalling the user's id, navigate to main profile
     useEffect(() => {
         if (id===profile._id) {
-            navigate("/", { replace: true });
+            navigate("/profile", { replace: true });
         } 
     })
   

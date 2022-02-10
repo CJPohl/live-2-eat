@@ -17,13 +17,13 @@ export const profile_search = async (req, res) => {
     try {
         // Query 20 items of the user db based upon textScore of user's search
         const results = await User.find(
-            {$text: {$search: req.body.search}},
+            {$text: {$search: req.params.search}},
             {score: {$meta: 'textScore'}}
         ).sort({score: {$meta: 'textScore'}}).limit(20);
-        console.log(`User ${req.body.userId} made a profile search.`)
+        console.log(`User made a profile search.`)
         res.status(200).json(results);
     } catch (err) {
-        console.log(`ERR: Failed search for user ${req.body.userId}.`);
+        console.log(`ERR: Failed search for user.`);
         res.status(404).json({msg: err.message});
     }
 }

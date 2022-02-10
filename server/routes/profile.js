@@ -9,7 +9,7 @@ import {profile_main_get, profile_search, profile_other_get, follow_profile, unf
 router.get('/main/:token', profile_main_get);
 
 // User search GET
-router.get('/search', profile_search);
+router.get('/search/:search', profile_search);
 
 // Show other user profile GET
 router.get('/:id', profile_other_get);

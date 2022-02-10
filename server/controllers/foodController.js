@@ -6,12 +6,13 @@ export const search_food = async (req, res) => {
     try {
         // Query 20 items of the food db based upon textScore of user's search
         const results = await Food.find(
-            {$text: {$search: req.body.search}},
+            {$text: {$search: req.params.search}},
             {score: {$meta: 'textScore'}}
         ).sort({score: {$meta: 'textScore'}}).limit(20);
-
+        console.log(`User made a food search.`)
         res.status(200).json(results);
     } catch (err) {
+        console.log(`ERR: Failed search for user.`);
         res.status(404).json({msg: err.message});
     }
 }

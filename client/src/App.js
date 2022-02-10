@@ -12,6 +12,7 @@ import "@fortawesome/fontawesome-free/js/brands";
 import { Sidebar } from './components/Sidebar';
 import { TopBar } from './components/TopBar';
 import { UserList } from './features/profile/UserList';
+import { FoodList } from './features/profile/FoodList';
 import { Feed } from './features/feed/Feed';
 import { Login } from './features/auth/Login';
 import { Signup } from './features/auth/Signup';
@@ -50,6 +51,7 @@ export const App = () => {
                         <Route exact path='/signup' element={<Signup />} />
                         <Route exact path='/mobile-menu' element={<MobileMenu />} />
                         <Route exact path='/user-search' element={<UserList />} />
+                        <Route exact path='/food-search' element={<FoodList />} />
                         <Route exact path='/profile/:id' element={<OtherProfile />} />
                         <Route exact path='/new-user' element={<NewUser />} />
                     </Routes>

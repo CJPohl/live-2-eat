@@ -19,9 +19,14 @@ export const fetchMain = createAsyncThunk('profile/main', async (token) => {
 // Search profiles
 export const searchProfiles = createAsyncThunk('profile/search', async (search) => {
     const response = await axios.get(`http://localhost:5000/profile/search/${search}`);
-    console.log(response.data);
     return response.data;
 });
+
+// Search food
+export const searchFoods = createAsyncThunk('food/search', async (search) => {
+    const response = await axios.get(`http://localhost:5000/food/search/${search}`);
+    return response.data;
+})
 
 // Update bio
 export const updateAbout = createAsyncThunk('profile/update/about', async (body) => {
@@ -92,6 +97,10 @@ const profileSlice = createSlice({
                 state.status = 'idle';
                 state.profileSearch = action.payload;
             })
+            .addCase(searchFoods.fulfilled, (state, action) => {
+                state.status = 'idle';
+                state.foodSearch = action.payload;
+            })
             .addCase(updateAbout.fulfilled, (state, action) => {
                 state.status = 'idle';
                 state.user = action.payload;
@@ -134,5 +143,7 @@ export default profileSlice.reducer;
 export const selectProfile = (state) => state.profile.user;
 
 export const selectProfileSearchResults = (state) => state.profile.profileSearch;
+
+export const selectFoodSearchResults = (state) => state.profile.foodSearch;
 
 export const selectIsNew = (state) => (state.profile.user) ? state.profile.user.new_user : '';

@@ -6,7 +6,7 @@ import { search_food, add_food, reset_food, update_calorie_current, reset_calori
 /// FOOD MANAGEMENT
 
 // Food query GET
-router.get('/search', search_food);
+router.get('/search/:search', search_food);
 
 // Add food for day PUT
 router.put('/add', add_food);
