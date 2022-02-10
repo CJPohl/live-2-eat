@@ -33,8 +33,7 @@ const UserSchema = new Schema (
 UserSchema.index(
     {
         first_name: 'text',
-        last_name: 'text',
-        
+        last_name: 'text'
     }
 );
 
