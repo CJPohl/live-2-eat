@@ -76,6 +76,20 @@ export const updateCalorieMax = createAsyncThunk('profile/update/calorie-max', a
     return response.data;
 });
 
+/// SOCIAL ///
+
+// Follow profile
+export const followProfile = createAsyncThunk('profile/follow', async (body) => {
+    const response = await axios.put('http://localhost:5000/profile/follow', {followerId: body.followerId, followedId: body.followedId});
+    return response.data;
+});
+
+// Unfollow profile
+export const unfollowProfile = createAsyncThunk('profile/unfollow', async (body) => {
+    const response = await axios.put('http://localhost:5000/profile/unfollow', {followerId: body.followerId, followedId: body.followedId});
+    return response.data;
+});
+
 // Profile reducers
 const profileSlice = createSlice({
     name: 'profile',
@@ -132,6 +146,14 @@ const profileSlice = createSlice({
             .addCase(updateCalorieMax.fulfilled, (state, action) => {
                 state.status = 'idle';
                 state.user = action.payload;
+            })
+            .addCase(followProfile.fulfilled, (state, action) => {
+                state.status = 'idle';
+                state.user = action.payload.updatedFollower;
+            })
+            .addCase(unfollowProfile.fulfilled, (state, action) => {
+                state.status = 'idle';
+                state.user = action.payload.updatedFollower;
             })
     }
 });

@@ -14,7 +14,7 @@ export const MainProfile = () => {
         if (!isLoggedIn) {
             navigate("/login", { replace: true });
         }
-    }, [isLoggedIn, navigate]);
+    }, [isLoggedIn, navigate]); 
 
     const content = (!isLoggedIn) ? '' : <div className="fade-in p-6 2xl:px-72 2xl:py-20  h-full flex flex-col">
     <ProfileHeader />

@@ -1,12 +1,14 @@
 import express from 'express';
 const router = express.Router();
 
-import { search_food, add_food, reset_food, update_calorie_current, reset_calorie_current } from '../controllers/foodController.js';
+import { search_food, add_food, reset_food, update_calorie_current, reset_calorie_current, single_food } from '../controllers/foodController.js';
 
 /// FOOD MANAGEMENT
 
 // Food query GET
 router.get('/search/:search', search_food);
+
+router.get('/single/:id', single_food);
 
 // Add food for day PUT
 router.put('/add', add_food);

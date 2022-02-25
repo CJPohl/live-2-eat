@@ -20,6 +20,7 @@ import {MainProfile} from './features/profile/MainProfile';
 import { OtherProfile } from './features/profile/OtherProfile';
 import { MobileMenu } from './components/MobileMenu';
 import { NewUser } from './features/profile/NewUser';
+import { SingleFood } from './features/food/SingleFood';
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -42,7 +43,7 @@ export const App = () => {
         <Router>
             <div className='lg:h-screen flex'>
                 <Sidebar />
-                <div className='w-full flex flex-col bg-gradient-to-r from-slate-50 to-gray-100'>
+                <div className='relative w-full flex flex-col bg-gradient-to-r from-slate-50 to-gray-100 lg:overflow-hidden'>
                     <TopBar />
                     <Routes>
                         <Route exact path='/' element={<Feed />} />
@@ -52,8 +53,10 @@ export const App = () => {
                         <Route exact path='/mobile-menu' element={<MobileMenu />} />
                         <Route exact path='/user-search' element={<UserList />} />
                         <Route exact path='/food-search' element={<FoodList />} />
+                        <Route exact path='/profile/followers/all/:id' element={''} />
                         <Route exact path='/profile/:id' element={<OtherProfile />} />
                         <Route exact path='/new-user' element={<NewUser />} />
+                        <Route exact path='/food/:id' element={<SingleFood />} />
                     </Routes>
                 </div>
             </div>

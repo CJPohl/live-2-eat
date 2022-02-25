@@ -10,8 +10,8 @@ export const UserList = () => {
 
     // DOM content for search query
     const profiles = profileResults.map((user) => (
-        <Link to={`/profile/${user._id}`}>
-            <article className="flex items-center justify-between border border-black p-6" key={user._id}>
+        <Link  key={user._id} to={`/profile/${user._id}`}>
+            <article className="flex items-center justify-between border border-black p-6">
                 <div className="flex flex-col">
                     <p className="text-lg text-indigo-600/90 font-bold">{user.first_name + ' ' + user.last_name}</p>
                     <p className="text-slate-400">{user.about.substring(0, 20)}...</p>

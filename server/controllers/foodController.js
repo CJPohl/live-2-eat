@@ -17,6 +17,18 @@ export const search_food = async (req, res) => {
     }
 }
 
+// Query single food
+export const single_food = async (req, res) => {
+    try {
+        const food = await Food.findById(req.params.id);
+        console.log(`User made a single food request on ${req.params.id}`);
+        res.status(200).json(food);
+    } catch (err) {
+        console.log('Failed GET of Single Food.');
+        res.status(404).json({msg: err.message});
+    }
+}
+
 // Add food to daily food
 export const add_food = async (req, res) => {
     try {
