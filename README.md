@@ -18,6 +18,12 @@ Eat 2 Live is a modernized calorie and food tracking application that allows use
 TBA
 
 ## Changelog
+
+### v0.2b
+- Search for food and other users!
+- Pull up details for a single food or another user's profile
+- Follow and unfollow profiles :)
+
 ### v0.2
 - New Features for new users
 - New Users can input various physical attributes which will be updated by NodeJS to the DB

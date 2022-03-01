@@ -11,15 +11,15 @@ import "@fortawesome/fontawesome-free/js/brands";
 
 import { Sidebar } from './components/Sidebar';
 import { TopBar } from './components/TopBar';
-import { UserList } from './features/profile/UserList';
-import { FoodList } from './features/profile/FoodList';
+import { UserList } from './features/profile/search/UserList';
+import { FoodList } from './features/profile/search/FoodList';
 import { Feed } from './features/feed/Feed';
 import { Login } from './features/auth/Login';
 import { Signup } from './features/auth/Signup';
-import {MainProfile} from './features/profile/MainProfile';
-import { OtherProfile } from './features/profile/OtherProfile';
+import {MainProfile} from './features/profile/details/MainProfile';
+import { OtherProfile } from './features/profile/search/OtherProfile';
 import { MobileMenu } from './components/MobileMenu';
-import { NewUser } from './features/profile/NewUser';
+import { NewUser } from './features/profile/new/NewUser';
 import { SingleFood } from './features/food/SingleFood';
 
 export const App = () => {
@@ -57,6 +57,7 @@ export const App = () => {
                         <Route exact path='/profile/:id' element={<OtherProfile />} />
                         <Route exact path='/new-user' element={<NewUser />} />
                         <Route exact path='/food/:id' element={<SingleFood />} />
+                        <Route exact path='/more-info/:id' element={''} />
                     </Routes>
                 </div>
             </div>

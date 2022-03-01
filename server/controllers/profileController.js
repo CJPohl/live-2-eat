@@ -66,7 +66,7 @@ export const unfollow_profile = async (req, res) => {
         const updatedFollowed = await User.findByIdAndUpdate(req.body.followedId, {
             $pull: {'followers': req.body.followerId}
         }, {new: true});
-
+        console.log(`${req.body.followerId} unfollowed ${req.body.followedId}.`);
         res.status(200).json({updatedFollower, updatedFollowed});
     } catch (err) {
         console.log(`ERR: Failed unfollow for user.`);
