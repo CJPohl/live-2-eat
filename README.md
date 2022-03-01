@@ -3,7 +3,7 @@
 Eat 2 Live is a modernized calorie and food tracking application that allows users to casually monitor their eating and dietary habits throughout the day.  This is an ongoing project that will updated on a quick basis.
 
 ## Version
-- Current Released version 0.2a
+- Current Released version 0.2b
 
 ## Screenshots
 ### Warning!  This project is a WIP and visuals may not reflect the UI of the released version
