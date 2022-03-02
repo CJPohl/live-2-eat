@@ -1,12 +1,10 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { selectLoggedIn } from "../../auth/loginSlice";
 import { OtherProfileTabSelector } from "../details/OtherProfileTabSelector";
-import { ProfileHeader } from "../details/ProfileHeader";
 import { selectProfile } from "../profileSlice";
-import { ProfileTabSelector } from "../details/ProfileTabSelector";
+import { OtherProfileHeader } from "../details/OtherProfileHeader";
 
 
 export const OtherProfile = () => {
@@ -29,25 +27,11 @@ export const OtherProfile = () => {
         } 
     });
 
-    // Hold state for fetched profile
-    const [fetchedProfile, setProfile] = useState('');
-
-    // Fetch profile on render
-    useEffect(() => {
-        axios.get(`http://localhost:5000/profile/${id}`)
-        .then((response) => {
-            setProfile(response.data);
-        }, (err) => {
-            console.log(err.message);
-        });
-    }, []);
-
     const content = (!isLoggedIn) ? '' : <div id='profile-all' className="fade-in p-6 2xl:px-72 2xl:py-20 h-full flex flex-col">
-    <ProfileHeader profile={fetchedProfile} />
+    <OtherProfileHeader  />
     <OtherProfileTabSelector />
     </div>
   
-
     return (
         content
     );

@@ -4,10 +4,8 @@ import User from '../models/User.js';
 export const profile_main_get = async (req, res) => {
     try {
         const userProfile = await User.findOne({'current_token': req.params.token});
-        console.log('Profile fetched.')
         res.status(200).json(userProfile);
     } catch (err) {
-        console.log('ERR: Failed to fetch profile.')
         res.status(404).json({msg: err.message});
     }
 }
@@ -20,10 +18,8 @@ export const profile_search = async (req, res) => {
             {$text: {$search: req.params.search}},
             {score: {$meta: 'textScore'}}
         ).sort({score: {$meta: 'textScore'}}).limit(20);
-        console.log(`User made a profile search.`)
         res.status(200).json(results);
     } catch (err) {
-        console.log(`ERR: Failed search for user.`);
         res.status(404).json({msg: err.message});
     }
 }
@@ -48,10 +44,8 @@ export const follow_profile = async (req, res) => {
         const updatedFollowed = await User.findByIdAndUpdate(req.body.followedId, {
             $push: {'followers': req.body.followerId}
         }, {new: true});
-        console.log(`${req.body.followerId} followed ${req.body.followedId}.`);
         res.status(200).json({updatedFollower, updatedFollowed});
     } catch (err) {
-        console.log(`ERR: Failed follow for user.`);
         res.status(404).json({msg: err.message});
     }
 }
@@ -66,10 +60,8 @@ export const unfollow_profile = async (req, res) => {
         const updatedFollowed = await User.findByIdAndUpdate(req.body.followedId, {
             $pull: {'followers': req.body.followerId}
         }, {new: true});
-        console.log(`${req.body.followerId} unfollowed ${req.body.followedId}.`);
         res.status(200).json({updatedFollower, updatedFollowed});
     } catch (err) {
-        console.log(`ERR: Failed unfollow for user.`);
         res.status(404).json({msg: err.message});
     }
 }
@@ -93,10 +85,8 @@ export const update_about = async (req, res) => {
         const user = await User.findByIdAndUpdate(req.body.userId, {
             about: req.body.about
         }, {new: true});
-        console.log(`User ${req.body.userId} had their bio updated.`);
         res.status(200).json(user);
     } catch (err) {
-        console.log(`ERR: Failed update on user ${req.body.userId}.`);
         res.status(404).json({msg: err.message});
     }
 }
@@ -107,10 +97,8 @@ export const update_height = async (req, res) => {
         const user = await User.findByIdAndUpdate(req.body.userId, {
             height: req.body.height
         }, {new: true});
-        console.log(`User ${req.body.userId} had their height updated.`);
         res.status(200).json(user);
     } catch (err) {
-        console.log(`ERR: Failed update on user ${req.body.userId}.`);
         res.status(404).json({msg: err.message});
     }
 }
@@ -121,10 +109,8 @@ export const update_weight_goal_type = async (req, res) => {
         const user = await User.findByIdAndUpdate(req.body.userId, {
             weight_goal_type: req.body.weightGoalType
         }, {new: true});
-        console.log(`User ${req.body.userId} had their weight goal type updated.`);
         res.status(200).json(user);
     } catch (err) {
-        console.log(`ERR: Failed update on user ${req.body.userId}.`);
         res.status(404).json({msg: err.message});
     }
 }
@@ -135,10 +121,8 @@ export const update_weight = async (req, res) => {
         const user = await User.findByIdAndUpdate(req.body.userId, {
             weight: req.body.weight
         }, {new: true});
-        console.log(`User ${req.body.userId} had their weight updated.`);
         res.status(200).json(user);
     } catch (err) {
-        console.log(`ERR: Failed update on user ${req.body.userId}.`);
         res.status(404).json({msg: err.message});
     }
 }
@@ -149,10 +133,8 @@ export const update_weight_goal = async (req, res) => {
         const user = await User.findByIdAndUpdate(req.body.userId, {
             weight_goal: req.body.weightGoal
         }, {new: true});
-        console.log(`User ${req.body.userId} had their weight goal updated.`);
         res.status(200).json(user);
     } catch (err) {
-        console.log(`ERR: Failed update on user ${req.body.userId}.`);
         res.status(404).json({msg: err.message});
     }
 }
@@ -166,7 +148,6 @@ export const update_weight_change = async (req, res) => {
 
         res.status(200).json(user);
     } catch (err) {
-        console.log(`ERR: Failed update on user ${req.body.userId}.`);
         res.status(404).json({msg: err.message});
     }
 }
@@ -177,10 +158,8 @@ export const update_calorie_max = async (req, res) => {
         const user = await User.findByIdAndUpdate(req.body.userId, {
             calorie_max: req.body.calorieMax
         }, {new: true});
-        console.log(`User ${req.body.userId} had their calorie max updated`);
         res.status(200).json(user);
     } catch (err) {
-        console.log(`ERR: Failed update on user ${req.body.userId}.`);
         res.status(404).json({msg: err.message});
     }
 }
@@ -191,10 +170,8 @@ export const update_bmi = async (req, res) => {
         const user = await User.findByIdAndUpdate(req.body.userId, {
             bmi: req.body.bmi
         }, {new: true});
-        console.log(`User ${req.body.userId} had their bmi updated.`);
         res.status(200).json(user);
     } catch (err) {
-        console.log(`ERR: Failed update on user ${req.body.userId}.`);
         res.status(404).json({msg: err.message});
     }
 }
@@ -208,7 +185,6 @@ export const add_favorite_food = async (req, res) => {
 
         res.status(200).json(user);
     } catch (err) {
-        console.log(`ERR: Failed update on user ${req.body.userId}.`);
         res.status(404).json({msg: err.message});
     }
 }
@@ -219,10 +195,8 @@ export const update_user_false = async (req, res) => {
         const user = await User.findByIdAndUpdate(req.body.userId, {
             new_user: false
         }, {new: true});
-        console.log(`User ${req.body.userId} no longer considered "New".`);
         res.status(200).json(user);
     } catch (err) {
-        console.log(`ERR: Failed update on user ${req.body.userId}.`);
         res.status(404).json({msg: err.message});
     }
 }

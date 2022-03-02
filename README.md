@@ -3,7 +3,7 @@
 Eat 2 Live is a modernized calorie and food tracking application that allows users to casually monitor their eating and dietary habits throughout the day.  This is an ongoing project that will updated on a quick basis.
 
 ## Version
-- Current Released version 0.2b
+- Current Released version 0.2b1
 
 ## Screenshots
 ### Warning!  This project is a WIP and visuals may not reflect the UI of the released version
@@ -18,6 +18,11 @@ Eat 2 Live is a modernized calorie and food tracking application that allows use
 TBA
 
 ## Changelog
+
+### v0.2b1
+- Better responsiveness for follow/unfollow profiles
+- Updated file management for non main user profiles
+- More info information is fleshed out
 
 ### v0.2b
 - Search for food and other users!
@@ -52,25 +57,8 @@ TBA
 - Add food to daily food and reflect to calorie budget
 - Settings tab implemented
 
-### 0.2 Wishlist
-- 'My Profile' UI fully implemented
-- Add new user features to profile creation to initiate body measurements and weight goals
-
 ## Find The Developer
 http://www.cjpohl.com
-
-## Custom Installation
-
-Fork this repo or download the package.  Open two terminals and navigate to the respective client and server directories.
-
-```bash
-cd server
-npm run serverstart
-```
-```bash
-cd client
-npm start
-```
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

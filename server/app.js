@@ -3,6 +3,7 @@ dotenv.config();
 
 import express from 'express';
 import cors from 'cors';
+import morgan from 'morgan';
 import passport from 'passport';
 
 const app = express();
@@ -27,6 +28,9 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
+
+// Log reponses to console
+app.use(morgan('dev'));
 
 // Init passport and session
 import './passport.js';
